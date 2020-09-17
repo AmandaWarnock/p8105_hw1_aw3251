@@ -65,10 +65,35 @@ as.numeric(as.factor(pull(prob1_df, samp_gt_0))) * pull(prob1_df, samp)
 
 ## Problem 2
 
-I have installed the package containing 'penguins' dataset. 
-I will now load the 'penguins' dataset.
+I have installed the package containing penguins dataset. 
+I will now load the penguins dataset.
 
-```{r load_penguins}
+```{r penguins, echo = FALSE}
 data("penguins", package = "palmerpenguins")
 ```
+
+Some important variables in this dataset include `r names(penguins)`. The penguin datset has `r nrow(penguins)` rows and `r ncol(penguins)` columns.
+The mean bill length is `r round(mean(penguins$bill_length_mm, na.rm = TRUE), 1)`mm and the mean bill depth is `r round(mean(penguins$bill_depth_mm, na.rm = TRUE), 1)`mm. The mean flipper length is `r round(mean(penguins$flipper_length_mm, na.rm = TRUE), 1)`mm. The mean body mass is `r round(mean(penguins$body_mass_g, na.rm = TRUE), 1)`g. 
+
+The species included are `r unique(pull(penguins, species))`. The years included are `r unique(pull(penguins, year))`. The islands included are `r unique(pull(penguins, island))`. 
+
+
+Below is a scatter plot comparing bill length (mm) and flipper length (mm).
+
+```{r}
+plot_df = tibble(
+  x = penguins$bill_length_mm,
+  y = penguins$flipper_length_mm,
+  species = penguins$species
+)
+
+ggplot(data = plot_df, 
+       aes(x = x, 
+           y = y, 
+           color = species)) + geom_point() + 
+      labs(title = "bill and flipper length", 
+           x = "bill length (mm)", 
+           y = "flipper length (mm)") 
+```
+
 
