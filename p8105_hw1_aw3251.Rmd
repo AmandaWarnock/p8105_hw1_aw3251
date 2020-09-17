@@ -80,7 +80,7 @@ The species included are `r unique(pull(penguins, species))`. The years included
 
 Below is a scatter plot comparing bill length (mm) and flipper length (mm).
 
-```{r}
+```{r plot}
 plot_df = tibble(
   x = penguins$bill_length_mm,
   y = penguins$flipper_length_mm,
@@ -94,6 +94,15 @@ ggplot(data = plot_df,
       labs(title = "bill and flipper length", 
            x = "bill length (mm)", 
            y = "flipper length (mm)") 
+
+ggsave(
+  hw1_plot,
+  plot = last_plot(),
+  device = NULL,
+  path = NULL,
+  scale = 1, 
+  limitsize = TRUE
+)
 ```
 
 
